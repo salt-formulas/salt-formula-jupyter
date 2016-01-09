@@ -1,4 +1,7 @@
+
+jupyter
 numpy
+sympy
 scipy
 pandas
 pycast==v0.1.5-alpha
