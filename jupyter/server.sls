@@ -20,7 +20,9 @@ jupyter:
 
 jupyter_conf_dir:
   file.directory:
-  - name: /srv/jupyter/.jupyter
+  - names:
+    - /srv/jupyter/.jupyter
+    - /var/log/jupyter
   - mode: 700
   - makedirs: true
   - user: jupyter
