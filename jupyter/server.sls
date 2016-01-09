@@ -5,18 +5,12 @@ jupyter_packages:
   pkg.installed:
   - names: {{ server.pkgs }}
 
-jupyter:
-  user.present:
-  - name: jupyter
-  - shell: /bin/bash
-  - home: /srv/jupyter
-
 /srv/jupyter:
   virtualenv.manage:
   - requirements: salt://jupyter/files/requirements.txt
   - require:
     - pkg: jupyter_packages
-    - user: jupyter
+    - user: root
 
 jupyter_conf_dir:
   file.directory:
@@ -25,13 +19,13 @@ jupyter_conf_dir:
     - /var/log/jupyter
   - mode: 700
   - makedirs: true
-  - user: jupyter
+  - user: root
   - require:
     - virtualenv: /srv/jupyter
 
 jupyter_config:
   file.managed:
-  - name: /srv/jupyter/.jupyter/jupyter_notebook_config.py
+  - name: /root/.jupyter/jupyter_notebook_config.py
   - source: salt://jupyter/files/jupyter_notebook_config.py
   - template: jinja
   - user: jupyter
