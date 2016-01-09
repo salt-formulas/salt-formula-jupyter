@@ -1,8 +1,11 @@
 {%- load_yaml as base_defaults %}
 Debian:
   pkgs:
-  - helpdesk
-  bas_dir: /srv/jupyter
+  - python-dev
+  base_dir: /srv/jupyter
+  bind:
+    address: 0.0.0.0
+    port: 8888
 {%- endload %}
 
 {%- set server = salt['grains.filter_by'](base_defaults, merge=salt['pillar.get']('jupyter:server')) %}
