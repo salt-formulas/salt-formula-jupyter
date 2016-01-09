@@ -1,4 +1,5 @@
 
+notebook
 jupyter
 numpy
 sympy
