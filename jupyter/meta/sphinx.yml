@@ -1,0 +1,8 @@
+{%- from "jupyter/map.jinja" import server with context %}
+doc:
+  name: jupyter
+  description: Open source, interactive data science and scientific computing across over 40 programming languages.
+  role:
+    server:
+      name: server
+      param: {}

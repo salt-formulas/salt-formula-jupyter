@@ -1,0 +1,15 @@
+Source: salt-formula-jupyter
+Maintainer: ales.komarek@newt.cz
+Section: admin
+Priority: optional
+Build-Depends: debhelper (>= 9)
+Standards-Version: 3.9.6
+Homepage: http://www.tcpcloud.eu
+Vcs-Browser: https://github.com/tcpcloud/salt-formula-jupyter
+Vcs-Git: https://github.com/tcpcloud/salt-formula-jupyter.git
+
+Package: salt-formula-jupyter
+Architecture: all
+Depends: ${misc:Depends}, salt-master, reclass
+Description: jupyter salt formula
+ Install and configure jupyter system.
