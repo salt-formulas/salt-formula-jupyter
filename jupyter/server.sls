@@ -16,6 +16,7 @@ jupyter_conf_dir:
   file.directory:
   - names:
     - /srv/jupyter/.jupyter
+    - /root/.jupyter
     - /var/log/jupyter
   - mode: 700
   - makedirs: true
@@ -28,7 +29,7 @@ jupyter_config:
   - name: /root/.jupyter/jupyter_notebook_config.py
   - source: salt://jupyter/files/jupyter_notebook_config.py
   - template: jinja
-  - user: jupyter
+  - user: root
   - mode: 600
   - require:
     - file: jupyter_conf_dir
@@ -37,7 +38,7 @@ jupyter_notebook_source:
   git.latest:
   - name: {{ server.notebook_source.address }}
   - target: /srv/jupyter/notebook
-  - rev: {{ server.notebook_source.get('rev', server.notebook_source.get('revision', 'master')) }}
+  - branch: {{ server.notebook_source.get('branch', server.notebook_source.get('revision', 'master')) }}
   - require:
     - virtualenv: /srv/jupyter
 
