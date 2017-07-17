@@ -6,5 +6,6 @@ numpy
 sympy
 scipy
 pandas
+vega
 pycast==v0.1.5-alpha
 git+https://github.com/direvius/libgraphite.git#egg=libgraphite

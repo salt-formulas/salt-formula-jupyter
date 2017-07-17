@@ -1,0 +1,17 @@
+
+[Unit]
+Description=Jupyter Notebook
+
+[Service]
+Type=simple
+PIDFile=/run/jupyter.pid
+ExecStart=/srv/jupyter/bin/jupyter-notebook --config=/srv/jupyter/.jupyter/jupyter_notebook_config.py
+User=jupyter
+Group=jupyter
+WorkingDirectory=/srv/jupyter/
+Restart=always
+RestartSec=10
+#KillMode=mixed
+
+[Install]
+WantedBy=multi-user.target

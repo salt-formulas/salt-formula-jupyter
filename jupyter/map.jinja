@@ -2,11 +2,13 @@
 Debian:
   pkgs:
   - python-dev
+  - python-virtualenv
   - gfortran
   - libblas-dev
   - liblapack-dev
   - libatlas-base-dev
   base_dir: /srv/jupyter
+  service: jupyter
   bind:
     address: 0.0.0.0
     port: 8888

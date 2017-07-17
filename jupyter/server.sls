@@ -5,32 +5,46 @@ jupyter_packages:
   pkg.installed:
   - names: {{ server.pkgs }}
 
+jupyter_user:
+  user.present:
+  - name: jupyter
+  - home: /srv/jupyter
+
 /srv/jupyter:
   virtualenv.manage:
   - requirements: salt://jupyter/files/requirements.txt
   - require:
     - pkg: jupyter_packages
-    - user: root
 
 jupyter_conf_dir:
   file.directory:
   - names:
     - /srv/jupyter/.jupyter
-    - /root/.jupyter
     - /var/log/jupyter
   - mode: 700
+  - user: jupyter
   - makedirs: true
-  - user: root
+  - user: jupyter
   - require:
     - virtualenv: /srv/jupyter
+    - user: jupyter_user
 
 jupyter_config:
   file.managed:
-  - name: /root/.jupyter/jupyter_notebook_config.py
+  - name: /srv/jupyter/.jupyter/jupyter_notebook_config.py
   - source: salt://jupyter/files/jupyter_notebook_config.py
   - template: jinja
-  - user: root
+  - user: jupyter
   - mode: 600
+  - require:
+    - file: jupyter_conf_dir
+
+jupyter_service_config:
+  file.managed:
+  - name: /usr/lib/systemd/system/jupyter.service
+  - source: salt://jupyter/files/jupyter.service
+  - template: jinja
+  - makedirs: true
   - require:
     - file: jupyter_conf_dir
 
@@ -41,5 +55,17 @@ jupyter_notebook_source:
   - branch: {{ server.notebook_source.get('branch', server.notebook_source.get('revision', 'master')) }}
   - require:
     - virtualenv: /srv/jupyter
+
+{%- if not grains.get('noservices', False) %}
+
+jupyter_service:
+  service.running:
+  - enable: true
+  - name: {{ server.service }}
+  - watch:
+    - file: jupyter_config
+    - git: jupyter_notebook_source
+
+{%- endif %}
 
 {%- endif %}
