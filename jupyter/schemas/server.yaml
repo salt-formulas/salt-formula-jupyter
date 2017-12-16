@@ -1,0 +1,48 @@
+title: Jupyter Server role
+"$schema": http://json-schema.org/draft-04/schema#
+description: |
+  Jupyter service in server role.
+type: object
+additionalProperties: false
+
+properties:
+  bind:
+    type: object
+    description: Network bindings of Jypyter server.
+    properties:
+      $ref: "#/definitions/bind"
+  notebook_source:
+    type: object
+    description: Source to the notebook served by the server.
+    properties:
+      $ref: "#/definitions/notebook_source"
+  enabled:
+    type: boolean
+    description: Is Jupyter server enabled?
+
+definitions:
+  bind:
+    type: object
+    properties:
+      port:
+        type: integer
+        description: Bind service to this network port.
+      address:
+        type: string
+        description: Bind service to this network address.
+  notebook_source:
+    type: object
+    properties:
+      engine:
+        type: string
+        description: Type of the notebook's code source.
+      address:
+        type: string
+        description: Address where repository is stored.
+      revision:
+        type: string
+        description: Repository revision to pull the data from.
+      requirements:
+        type: boolean
+        description: Install requirements.txt present in the repository?w2
+        default: false

@@ -22,6 +22,7 @@ Single jupyter server
           engine: git
           address: gitrepo
           revision: master
+          requirements: true
 
 Read more
 =========

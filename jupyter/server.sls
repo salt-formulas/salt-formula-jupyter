@@ -12,7 +12,6 @@ jupyter_user:
 
 /srv/jupyter:
   virtualenv.manage:
-  - requirements: salt://jupyter/files/requirements.txt
   - require:
     - pkg: jupyter_packages
 
@@ -55,6 +54,18 @@ jupyter_notebook_source:
   - branch: {{ server.notebook_source.get('branch', server.notebook_source.get('revision', 'master')) }}
   - require:
     - virtualenv: /srv/jupyter
+
+{%- if server.notebook_source.get('requirements', False) %}
+
+jupyter_install_requirements:
+  pip.installed:
+  - requirements: /srv/jupyter/notebook/.requirements.txt
+  - bin_env: /srv/jupyter
+  - require:
+    - git: jupyter_notebook_source
+    - virtualenv: /srv/jupyter
+
+{%- endif %}
 
 {%- if not grains.get('noservices', False) %}
 
