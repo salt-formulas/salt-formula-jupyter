@@ -1,3 +1,5 @@
+%YAML 1.1
+---
 title: Jupyter Server role
 "$schema": http://json-schema.org/draft-04/schema#
 description: |
@@ -7,15 +9,9 @@ additionalProperties: false
 
 properties:
   bind:
-    type: object
-    description: Network bindings of Jypyter server.
-    properties:
-      $ref: "#/definitions/bind"
+    $ref: "#/definitions/bind"
   notebook_source:
-    type: object
-    description: Source to the notebook served by the server.
-    properties:
-      $ref: "#/definitions/notebook_source"
+    $ref: "#/definitions/notebook_source"
   enabled:
     type: boolean
     description: Is Jupyter server enabled?
@@ -23,6 +19,7 @@ properties:
 definitions:
   bind:
     type: object
+    description: Network bindings of Jypyter server.
     properties:
       port:
         type: integer
@@ -32,6 +29,7 @@ definitions:
         description: Bind service to this network address.
   notebook_source:
     type: object
+    description: Source to the notebook served by the server.
     properties:
       engine:
         type: string
