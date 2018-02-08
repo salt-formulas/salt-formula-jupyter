@@ -10,6 +10,6 @@ Vcs-Git: https://github.com/tcpcloud/salt-formula-jupyter.git
 
 Package: salt-formula-jupyter
 Architecture: all
-Depends: ${misc:Depends}, salt-master, reclass
+Depends: ${misc:Depends}
 Description: jupyter salt formula
  Install and configure jupyter system.
